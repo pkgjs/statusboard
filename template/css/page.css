@@ -1,0 +1,50 @@
+@import './normalize-content.css';
+
+header {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 2.75rem;
+  background-image: linear-gradient(#fafafa, #f0f0f0);
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #ddd;
+  padding: 0 1rem;
+
+  .logo {
+    line-height: 0;
+    margin: 0 6rem 0 0;
+
+    a {
+      font-size: 25px;
+      font-weight: 100;
+      color: #444;
+      text-decoration: none;
+    }
+  }
+
+  nav {
+    padding-top: .25rem;
+
+    a {
+      display: inline-block;
+      color: #444;
+      text-transform: lowercase;
+      font-size: .9rem;
+      padding: .75rem;
+      border-left: .0625rem solid #efefef;
+      border-right: .0625rem solid #efefef;
+    }
+
+    a:hover {
+      text-decoration: none;
+      background: #fafafa;
+    }
+  }
+}
+
+main {
+  padding: 4.75rem 2rem 2rem;
+}

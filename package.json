@@ -1,0 +1,55 @@
+{
+  "name": "@pkgjs/statusboard",
+  "version": "1.0.0",
+  "description": "A dashboard for project status",
+  "author": "Wes Todd <wes@wesleytodd.com>",
+  "keywords": [
+    "status",
+    "badgeboard",
+    "badges",
+    "express"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:pkgjs/statusboard.git"
+  },
+  "scripts": {
+    "test": "standard && mocha",
+    "prepublushOnly": "npm t"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "serve": "^11.1.0",
+    "standard": "^12.0.1"
+  },
+  "dependencies": {
+    "@octokit/plugin-throttling": "^2.6.0",
+    "@octokit/rest": "^16.28.2",
+    "@primer/octicons": "^9.1.1",
+    "@wesleytodd/buildcss": "0.0.4",
+    "@wesleytodd/buildjs": "0.0.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "cptmpl": "0.0.4",
+    "dotenv": "^8.0.0",
+    "es5-lit-element": "^2.2.1",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^6.4.1",
+    "install": "^0.13.0",
+    "js-yaml": "^3.13.1",
+    "level": "^5.0.1",
+    "libnpm": "^2.0.1",
+    "lit-element": "^2.2.1",
+    "nighthawk": "^2.3.0-0",
+    "node-fetch": "^2.6.0",
+    "npm": "^6.10.3",
+    "regenerator-runtime": "^0.13.3",
+    "yargs": "^13.2.4"
+  },
+  "standard": {
+    "ignore": [
+      "/docs/**/*.js"
+    ]
+  }
+}
