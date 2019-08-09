@@ -1,0 +1,6 @@
+#! /usr/bin/env node
+'use strict'
+const statusboard = require('../')
+
+// Construct the cli
+statusboard.cli(async (opts) => statusboard(opts), process.argv.slice(2))

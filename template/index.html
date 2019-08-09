@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <!-- <link rel="apple-touch-icon" href="icon.png"> -->
+    <meta name="theme-color" content="#fafafa">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link href="<%= files.css.index %>" rel="stylesheet" />
+    <script>
+      window.__config = {
+        title: "<%= title %>",
+        description: "<%= description %>",
+        baseUrl: "<%= baseUrl %>",
+        projects: <%- JSON.stringify(projects) %>,
+        files: <%- JSON.stringify(files) %>
+      }
+    </script>
+  </head>
+  <body>
+    <script src="<%= files.js.index %>"></script>
+  </body>
+</html>
