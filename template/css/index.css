@@ -1,0 +1,20 @@
+@import './normalize.css';
+@import './normalize-content.css';
+
+.issues-list,
+.users-list {
+  ul {
+    list-style: circle;
+
+    li {
+      padding: .25rem 0;
+    }
+  }
+}
+
+.project-link {
+  display: inline-block;
+  padding: .3rem;
+  background: #efefef;
+  border: .01rem solid #ddd;
+}

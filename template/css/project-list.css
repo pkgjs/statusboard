@@ -1,0 +1,31 @@
+@import './normalize-content.css';
+
+.project-list {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  td {
+    padding: .5rem;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #fff;
+  }
+  tr:nth-child(even) td {
+    background: #f9f9f9;
+  }
+  tr td:nth-child(1) {
+    max-width: 4rem;
+  }
+  tr td:nth-child(2),
+  tr td:nth-child(3),
+  tr td:nth-child(4) {
+    max-width: 2rem;
+    text-align: right;
+  }
+
+  .octicon {
+    display: inline-block;
+    vertical-align: text-top;
+    fill: currentColor;
+  }
+}
