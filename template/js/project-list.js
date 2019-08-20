@@ -22,15 +22,15 @@ class ProjectList extends LitElement {
             </td>
             <td title="Stars">
               ${project.stars || '0'}
-              <img class="octicon" src="${this.config.baseUrl}icons/star.svg">
+              <img class="octicon" src="${this.config.baseUrl}/icons/star.svg">
             </td>
             <td title="Watchers">
               ${project.watchers || '0'}
-              <img class="octicon" src="${this.config.baseUrl}icons/eye.svg">
+              <img class="octicon" src="${this.config.baseUrl}/icons/eye.svg">
             </td>
             <td title="Open Issues">
               ${project.openIssues || '0'}
-              <img class="octicon" src="${this.config.baseUrl}icons/issue-opened.svg">
+              <img class="octicon" src="${this.config.baseUrl}/icons/issue-opened.svg">
             </td>
             <td>
               ${project.packageJson && (html`
