@@ -22,19 +22,19 @@ require('nighthawk')({
     next()
   })
   .get('/', async () => {
-    const taggedIssues = await (await fetch(`${config.baseUrl}data/labeledIssues.json`)).json()
-    const userActivity = await (await fetch(`${config.baseUrl}data/userActivity.json`)).json()
+    const taggedIssues = await (await fetch(`${config.baseUrl}/data/labeledIssues.json`)).json()
+    const userActivity = await (await fetch(`${config.baseUrl}/data/userActivity.json`)).json()
 
     render(html`
       <statusboard-page .config="${config}">
         <style>main {display: flex;}</style>
         <main>
           <section>
-            <h1><a href="${config.baseUrl}issues">Top Issues</a></h1>
+            <h1><a href="${config.baseUrl}/issues">Top Issues</a></h1>
 
             ${Object.entries(taggedIssues).map(([tag, issues]) => html`
               <div class="issues-list">
-                <h3><a href="${config.baseUrl}issues/${tag}">${tag}</a></h3>
+                <h3><a href="${config.baseUrl}/issues/${tag}">${tag}</a></h3>
                 <ul>
                   ${issues.slice(0, 3).map((issue) => html`
                       <li>
@@ -63,7 +63,7 @@ require('nighthawk')({
     `, document.body)
   })
   .get('/projects', async () => {
-    const projects = await (await fetch(`${config.baseUrl}data/projects.json`)).json()
+    const projects = await (await fetch(`${config.baseUrl}/data/projects.json`)).json()
     render(html`
       <statusboard-page .config="${config}">
         <statusboard-project-list .projects=${projects} .config="${config}" />
@@ -71,8 +71,8 @@ require('nighthawk')({
     `, document.body)
   })
   .get('/issues', async () => {
-    const taggedIssues = await (await fetch(`${config.baseUrl}data/labeledIssues.json`)).json()
-    const userActivity = await (await fetch(`${config.baseUrl}data/userActivity.json`)).json()
+    const taggedIssues = await (await fetch(`${config.baseUrl}/data/labeledIssues.json`)).json()
+    const userActivity = await (await fetch(`${config.baseUrl}/data/userActivity.json`)).json()
 
     render(html`
       <statusboard-page .config="${config}">
