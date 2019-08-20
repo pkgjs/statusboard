@@ -18,7 +18,7 @@ class ProjectList extends LitElement {
           <tr>
             <td>
               <a href="https://www.github.com/${project.repoOwner}" target="_blank">${project.repoOwner}</a>
-              / <a href="${project.repoDetails.url}" target="_blank">${project.repoName}</a>
+              / <a href="${project.repo.url || `https://www.github.com/${project.repoOwner}/${project.repoName}`}" target="_blank">${project.repoName}</a>
             </td>
             <td title="Stars">
               ${project.stars || '0'}
