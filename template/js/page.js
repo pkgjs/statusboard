@@ -13,14 +13,14 @@ class Page extends LitElement {
       <link rel="stylesheet" href="${this.config.files.css.page}" />
       <header class="page-header">
         <h1 class="logo">
-          <a href="${this.config.baseUrl}" title="${this.config.title}">${this.config.title}</a>
+          <a href="${this.config.baseUrl || '/'}" title="${this.config.title}">${this.config.title}</a>
           <!-- <span class="description">${this.description}</span> -->
         </h1>
 
         <nav>
-          <a href="${this.config.baseUrl}" title="Home">Home</a>
-          <a href="${this.config.baseUrl}projects" title="Projects">Projects</a>
-          <a href="${this.config.baseUrl}issues" title="Issues">Issues</a>
+          <a href="${this.config.baseUrl || '/'}" title="Home">Home</a>
+          <a href="${this.config.baseUrl}/projects" title="Projects">Projects</a>
+          <a href="${this.config.baseUrl}/issues" title="Issues">Issues</a>
         </nav>
 
         <a class="statusboard" title="About @pkgjs/statusboard" href="https://github.com/pkgjs/statusboard" target="_blank">@pkgjs/statusboard</a>
