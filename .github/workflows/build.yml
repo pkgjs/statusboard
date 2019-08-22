@@ -1,0 +1,16 @@
+name: Index and build site
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Create GH Pages
+      uses: pkgjs/gh-pages@master
+      with:
+        nojekyll: true
+        repo: pkgjs/statusboard
+        commit: pages build from ${{ github.sha }}
+        build: npm i && npm run build
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -5,7 +5,7 @@ module.exports = {
   db: path.join(__dirname, 'tmp', 'data.db'),
   outputDirectory: path.join(__dirname, 'tmp'),
   github: {
-    token: process.env.GH_TOKEN
+    token: process.env.GITHUB_TOKEN
   },
 
   title: 'StatusBoard Test',

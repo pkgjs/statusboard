@@ -15,10 +15,15 @@
     "type": "git",
     "url": "git@github.com:pkgjs/statusboard.git"
   },
+  "bin": {
+    "statusboard": "./bin/statusboard"
+  },
   "scripts": {
     "test": "standard && mocha",
     "prepublushOnly": "npm t",
-    "postpublish": "git push origin && git push origin --tags"
+    "postpublish": "git push origin && git push origin --tags",
+    "build": "./bin/statusboard build -o ./gh-pages -C ./test/fixtures/config -d ./gh-pages/data.db",
+    "serve": "./bin/statusboard serve -o ./gh-pages -C ./test/fixtures/config -d ./gh-pages/data.db"
   },
   "devDependencies": {
     "mocha": "^6.1.4",
@@ -49,10 +54,5 @@
     "npm": "^6.10.3",
     "regenerator-runtime": "^0.13.3",
     "yargs": "^13.3.0"
-  },
-  "standard": {
-    "ignore": [
-      "/docs/**/*.js"
-    ]
   }
 }
