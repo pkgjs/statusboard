@@ -21,7 +21,7 @@ module.exports = async (_conf) => {
     serve: () => {
       return express()
         .use(config.baseUrl, express.static(config.outputDirectory))
-        .use((req, res) => res.sendFile(path.join(config.outputDirectory, '404.html')))
+        .use((req, res) => res.sendFile(path.resolve(config.outputDirectory, '404.html')))
         .listen(config.port, () => console.log(`Server listening on http://localhost:${config.port}`))
     },
     close: () => _db.close()

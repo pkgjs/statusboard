@@ -8,13 +8,13 @@ const statusboard = require('../')
 const { Config } = statusboard
 
 // These tests require a github token
-assert(process.env.GH_TOKEN, `
-Tests require GH_TOKEN to be a valid GitHub personal token.
+assert(process.env.GITHUB_TOKEN, `
+Tests require GITHUB_TOKEN to be a valid GitHub personal token.
 See: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
 
 Then run:
 
-  $ echo "GH_TOKEN=<your token>" > .env
+  $ echo "GITHUB_TOKEN=<your token>" > .env
 `)
 
 const CONFIG = require('./fixtures/config')

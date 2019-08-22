@@ -2,6 +2,7 @@
 *~
 package-lock.json
 test/fixtures/tmp
+gh-pages
 
 # Logs
 logs
