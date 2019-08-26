@@ -71,8 +71,8 @@ class ProjectList extends LitElement {
             </td>
             <td>
               ${project.travis && (html`
-                <a href="https://travis-ci.org/${project.owner}/${project.name}">
-                  <img src="https://badgen.net/travis/${project.owner}/${project.name}" />
+                <a href="https://travis-ci.org/${project.repo}">
+                  <img src="https://badgen.net/travis/${project.repo}" />
                 </a>
               `)}
             </td>
