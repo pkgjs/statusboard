@@ -12,13 +12,13 @@ https://expressjs.github.io/statusboard/
 ## TODO
 
 - Cli logger
-- Pull commit activity
-- Clean up template
+- ~~Pull commit activity~~
+- ~~Clean up template~~
 - `create` command to setup a new project
 - ~~GH actions for building/publishing ([see express](https://github.com/expressjs/statusboard/blob/1de8da96746deb1952ecc0c22427f81083e022c9/.github/workflows/build.yml))~~ https://github.com/pkgjs/gh-pages
 - Contribution graph like on github
 - Meetings page (pull tag "meeting")
-- Orginizations (pull all repos from an org)
+- ~~Orginizations (pull all repos from an org)~~
 - Typescript support (load typings or if authored in TS)
 - People/Teams (specify and display teams, for example the express TC)
 - GH CI status
