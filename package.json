@@ -1,6 +1,6 @@
 {
   "name": "@pkgjs/statusboard",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A dashboard for project status",
   "author": "Wes Todd <wes@wesleytodd.com>",
   "keywords": [
