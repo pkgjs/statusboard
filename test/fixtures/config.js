@@ -17,6 +17,7 @@ module.exports = {
 
   projects: [
     'expressjs/discussions',
+    'expressjs/body-parser',
     {
       name: 'Express StatusBoard',
       repo: 'expressjs/statusboard'
