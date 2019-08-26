@@ -23,6 +23,8 @@
     "prepublushOnly": "npm t",
     "postpublish": "git push origin && git push origin --tags",
     "build": "./bin/statusboard build -o ./gh-pages -C ./test/fixtures/config -d ./gh-pages/data.db",
+    "index": "./bin/statusboard index -o ./gh-pages -C ./test/fixtures/config -d ./gh-pages/data.db",
+    "site": "./bin/statusboard site -o ./gh-pages -C ./test/fixtures/config -d ./gh-pages/data.db",
     "serve": "./bin/statusboard serve -o ./gh-pages -C ./test/fixtures/config -d ./gh-pages/data.db"
   },
   "devDependencies": {

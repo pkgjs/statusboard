@@ -66,10 +66,4 @@ suite(pkg.name, () => {
     const board = await statusboard(CONFIG)
     await board.buildSite()
   })
-
-  test.skip('should build a web page from a template', async function () {
-    this.timeout(0)
-    const board = await statusboard(CONFIG)
-    board.serve()
-  })
 })

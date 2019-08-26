@@ -14,18 +14,7 @@
     background: #f9f9f9;
   }
   tr td:nth-child(1) {
-    max-width: 4rem;
-  }
-  tr td:nth-child(2),
-  tr td:nth-child(3),
-  tr td:nth-child(4) {
-    max-width: 2rem;
-    text-align: right;
-  }
-
-  .octicon {
-    display: inline-block;
-    vertical-align: text-top;
-    fill: currentColor;
+    min-width: 8rem;
+    max-width: 12rem;
   }
 }
