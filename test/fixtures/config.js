@@ -3,6 +3,7 @@ const path = require('path')
 
 module.exports = {
   db: path.join(__dirname, 'tmp', 'data.db'),
+  basePath: '/statusboard',
   outputDirectory: path.join(__dirname, 'tmp'),
   github: {
     token: process.env.GITHUB_TOKEN

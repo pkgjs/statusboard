@@ -70,7 +70,7 @@ module.exports = {
     }
 
     if (!user) {
-      return data;
+      return data
     }
 
     data[user.login] = data[user.login] || user
