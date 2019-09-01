@@ -41,10 +41,10 @@ suite(pkg.name, () => {
     assert.strictEqual(board.config.projects[0].repoOwner, CONFIG.projects[0].split('/')[0])
     assert.strictEqual(board.config.projects[0].repoName, CONFIG.projects[0].split('/')[1])
 
-    assert.strictEqual(board.config.projects[1].name, CONFIG.projects[1].name)
-    assert.strictEqual(board.config.projects[1].repo, CONFIG.projects[1].repo)
-    assert.strictEqual(board.config.projects[1].repoOwner, CONFIG.projects[1].repo.split('/')[0])
-    assert.strictEqual(board.config.projects[1].repoName, CONFIG.projects[1].repo.split('/')[1])
+    assert.strictEqual(board.config.projects[1].name, CONFIG.projects[1])
+    assert.strictEqual(board.config.projects[1].repo, CONFIG.projects[1])
+    assert.strictEqual(board.config.projects[1].repoOwner, CONFIG.projects[1].split('/')[0])
+    assert.strictEqual(board.config.projects[1].repoName, CONFIG.projects[1].split('/')[1])
 
     assert.strictEqual(board.config.issueLabels.length, CONFIG.issueLabels.length)
     assert.strictEqual(board.config.people.length, CONFIG.people.length)
