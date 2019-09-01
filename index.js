@@ -12,6 +12,7 @@ module.exports = async (_conf) => {
 
   return {
     config,
+    db: _db,
     buildIndex: () => {
       return db.buildIndex(config, _db)
     },

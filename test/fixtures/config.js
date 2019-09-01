@@ -16,17 +16,11 @@ module.exports = {
   ],
 
   projects: [
-    'expressjs/discussions',
-    'expressjs/body-parser',
+    'nodejs/package-maintenance',
     {
       name: 'Express StatusBoard',
       repo: 'expressjs/statusboard'
     }
-  ],
-
-  issueLabels: [
-    'discuss',
-    'meeting'
   ],
 
   people: [

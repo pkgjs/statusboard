@@ -39,38 +39,42 @@ module.exports = {
 
     data = data || {}
     let user
+    const today = new Date()
+    let date
 
     if (type === 'ACTIVITY') {
+      date = new Date(detail.createdAt)
       switch (detail.type) {
         case 'IssuesEvent':
-          user = detail.payload.issue.user.login
-          data[user] = (data[user] || 0) + 1
+          user = detail.payload.issue.user
           break
         case 'PullRequestEvent':
-          user = detail.payload.pull_request.user.login
-          data[user] = (data[user] || 0) + 1
+          user = detail.payload.pull_request.user
           break
         case 'IssueCommentEvent':
-          user = detail.payload.comment.user.login
-          data[user] = (data[user] || 0) + 1
+          user = detail.payload.comment.user
           break
+        default:
+          return data
       }
     }
 
     if (type === 'COMMIT') {
-      const today = new Date()
-      const d = new Date(detail.date)
-      // Only for the lats 90 days
-      if (d > today.setDate(today.getDate() - 90)) {
-        user = detail.author.login
-        data[user] = (data[user] || 0) + 1
-      }
+      date = new Date(detail.date)
+      user = detail.author
     }
 
-    // Keep sorted and no longer than 30 users
-    data = Object.fromEntries(Object.entries(data).sort((v1, v2) => {
-      return v1[1] < v2[1] ? 1 : v1[1] === v2[1] ? 0 : -1
-    }).slice(0, 30).map(([name, count]) => ['' + name, count]))
+    // Only for the lats 90 days
+    if (date < today.setDate(today.getDate() - 90)) {
+      return data
+    }
+
+    if (!user) {
+      return data;
+    }
+
+    data[user.login] = data[user.login] || user
+    data[user.login].activityCount = (data[user.login].activityCount || 0) + 1
 
     return data
   },
@@ -88,7 +92,12 @@ module.exports = {
       }
 
       labels[label.name] = labels[label.name] || []
-      labels[label.name].push({ ...detail, project })
+      const d = {
+        label: label,
+        issue: detail,
+        project
+      }
+      labels[label.name].push(d)
       return labels
     }, data || {})
   }
