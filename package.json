@@ -9,7 +9,7 @@
     "badges",
     "express"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
   "repository": {
     "type": "git",
