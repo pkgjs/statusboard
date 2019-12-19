@@ -119,7 +119,7 @@ require('nighthawk')({
         <main>
           ${res.locals.issues.map(([tag, issues]) => html`
             <section>
-              <h1><a href="${config.baseUrl}issues/${tag.name}">${tag.name}</a></h1>
+              <h1><a href="${config.baseUrl}/issues/${tag.name}">${tag.name}</a></h1>
 
               <div class="issues-list">
                 <ul>
