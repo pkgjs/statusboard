@@ -72,7 +72,7 @@ require('nighthawk')({
                           <li>
                             <span class="project-link">
                               <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
-                              / <a href="${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
+                              / <a href="https://www.github.com/${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
                             </span>
                             : <a href="${issue.issue.url}" target="_blank">${issue.issue.title}</a>
                           </li>
