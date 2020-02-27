@@ -5,7 +5,6 @@ const assert = require('assert')
 const fs = require('fs-extra')
 const pkg = require('../package.json')
 const statusboard = require('../')
-const { Config } = statusboard
 
 // These tests require a github token
 assert(process.env.GITHUB_TOKEN, `
@@ -27,7 +26,7 @@ suite(pkg.name, () => {
     const board = await statusboard(CONFIG)
     assert.strictEqual(board.config.db, CONFIG.db)
     assert.strictEqual(board.config.outputDirectory, CONFIG.outputDirectory)
-    assert.strictEqual(board.config.baseUrl, Config.defaults.baseUrl)
+    assert.strictEqual(board.config.baseUrl, CONFIG.baseUrl)
     assert.strictEqual(board.config.title, CONFIG.title)
     assert.strictEqual(board.config.description, CONFIG.description)
 

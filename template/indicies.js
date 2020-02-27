@@ -80,7 +80,7 @@ module.exports = {
   },
 
   labeledIssues: async (data, config, key, { type, project, detail }) => {
-    if (type !== 'ISSUE' || detail.state !== 'open') {
+    if (type !== 'ISSUE' || detail.state !== 'OPEN') {
       return data
     }
 
