@@ -5,6 +5,9 @@ of GitHub projects.  When you have work spread across multiple repos
 and multiple orginizations, it is often hard to track things.  This
 is what `@pkgjs/statusboard` aims to solve.
 
+This repository is managed by the [Package Maintenance Working Group](https://github.com/nodejs/package-maintenance), see [Governance](https://github.com/nodejs/package-maintenance/blob/master/Governance.md).
+
+
 ## Example
 
 https://expressjs.github.io/statusboard/
