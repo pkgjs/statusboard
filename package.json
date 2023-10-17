@@ -39,7 +39,7 @@
     "@octokit/plugin-throttling": "^2.6.0",
     "@octokit/rest": "^16.28.2",
     "@primer/octicons": "^9.1.1",
-    "@wesleytodd/buildcss": "0.0.5",
+    "@wesleytodd/buildcss": "0.0.6",
     "@wesleytodd/buildjs": "0.0.8",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "cptmpl": "0.0.4",
