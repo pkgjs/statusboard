@@ -1,7 +1,9 @@
-name: Index and build site
+name: Generate Statusboard
 
 on:
   push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -46,7 +48,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './github-pages'
+        path: './gh-pages'
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
