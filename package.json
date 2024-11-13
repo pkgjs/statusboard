@@ -34,10 +34,10 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
-    "@octokit/graphql": "^4.3.1",
-    "@octokit/plugin-retry": "^2.2.0",
-    "@octokit/plugin-throttling": "^2.6.0",
-    "@octokit/rest": "^16.28.2",
+    "@octokit/graphql": "^7.1.0",
+    "@octokit/plugin-retry": "^6.0.1",
+    "@octokit/plugin-throttling": "^8.2.0",
+    "@octokit/rest": "^20.1.1",
     "@primer/octicons": "^9.1.1",
     "@wesleytodd/buildcss": "0.0.6",
     "@wesleytodd/buildjs": "0.0.8",
