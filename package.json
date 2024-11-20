@@ -58,5 +58,8 @@
     "npm": "^6.10.3",
     "regenerator-runtime": "^0.13.3",
     "yargs": "^13.3.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
