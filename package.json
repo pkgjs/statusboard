@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "mocha": "^10.8.2",
-    "serve": "^11.1.0",
     "standard": "^17.1.2"
   },
   "dependencies": {
