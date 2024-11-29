@@ -93,7 +93,7 @@ module.exports = {
 
       labels[label.name] = labels[label.name] || []
       const d = {
-        label: label,
+        label,
         issue: detail,
         project
       }
