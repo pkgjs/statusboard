@@ -9,6 +9,7 @@ class ProjectList extends LitElement {
       projects: { type: Object }
     }
   }
+
   render () {
     return html`
       <link rel="stylesheet" href="${this.config.files.css.projectList}" />

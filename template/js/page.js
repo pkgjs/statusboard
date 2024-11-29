@@ -8,6 +8,7 @@ class Page extends LitElement {
       config: { type: Object }
     }
   }
+
   render () {
     return html`
       <link rel="stylesheet" href="${this.config.files.css.page}" />
