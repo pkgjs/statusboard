@@ -9,10 +9,26 @@ on:
       - main
 
 concurrency:
-  group: "test"
+  group: "${{ github.workflow }} ✨ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
   cancel-in-progress: false
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts --only=dev
+
+      - name: Run lint
+        run: npm run lint
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -20,11 +36,16 @@ jobs:
         node-version: [18, 19, 20, 21, 22, 23]
     steps:
     - uses: actions/checkout@v4
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install and test
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: npm it
+      run: npm test
