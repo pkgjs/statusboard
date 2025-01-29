@@ -51,10 +51,9 @@
     "install": "^0.13.0",
     "js-yaml": "^3.13.1",
     "level": "^5.0.1",
-    "libnpm": "^2.0.1",
     "lit-element": "^2.2.1",
     "nighthawk": "^2.3.0-1",
-    "npm": "^6.10.3",
+    "pacote": "^20.0.0",
     "regenerator-runtime": "^0.13.3",
     "yargs": "^13.3.0"
   },
