@@ -45,6 +45,7 @@
     "cptmpl": "0.0.4",
     "dotenv": "^8.0.0",
     "es5-lit-element": "^2.2.1",
+    "es5-lit-html": "^1.1.1",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.4.1",
@@ -54,7 +55,6 @@
     "lit-element": "^2.2.1",
     "nighthawk": "^2.3.0-1",
     "pacote": "^20.0.0",
-    "regenerator-runtime": "^0.13.3",
     "yargs": "^13.3.0"
   },
   "engines": {
