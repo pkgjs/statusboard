@@ -55,6 +55,7 @@
     "lit-element": "^2.2.1",
     "nighthawk": "^2.3.0-1",
     "pacote": "^20.0.0",
+    "regenerator-runtime": "^0.14.1",
     "yargs": "^13.3.0"
   },
   "engines": {
