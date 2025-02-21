@@ -19,7 +19,8 @@
     "statusboard": "./bin/statusboard"
   },
   "scripts": {
-    "test": "standard && mocha",
+    "lint": "standard",
+    "test": "mocha",
     "prepublushOnly": "npm t",
     "postpublish": "git push origin && git push origin --tags",
     "clean": "./bin/statusboard clean -C ./test/fixtures/config -d ./gh-pages/data.db",
@@ -29,9 +30,8 @@
     "serve": "./bin/statusboard serve -o ./gh-pages -C ./test/fixtures/config -d ./gh-pages/data.db"
   },
   "devDependencies": {
-    "mocha": "^6.1.4",
-    "serve": "^11.1.0",
-    "standard": "^12.0.1"
+    "mocha": "^10.8.2",
+    "standard": "^17.1.2"
   },
   "dependencies": {
     "@octokit/graphql": "^7.1.0",
@@ -45,18 +45,16 @@
     "cptmpl": "0.0.4",
     "dotenv": "^8.0.0",
     "es5-lit-element": "^2.2.1",
+    "es5-lit-html": "^1.1.1",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.4.1",
     "install": "^0.13.0",
     "js-yaml": "^3.13.1",
     "level": "^5.0.1",
-    "libnpm": "^2.0.1",
     "lit-element": "^2.2.1",
     "nighthawk": "^2.3.0-1",
-    "node-fetch": "^2.6.0",
-    "npm": "^6.10.3",
-    "regenerator-runtime": "^0.13.3",
+    "pacote": "^20.0.0",
     "yargs": "^17.7.2"
   },
   "engines": {
