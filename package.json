@@ -43,7 +43,7 @@
     "@wesleytodd/buildjs": "0.0.8",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "cptmpl": "0.0.4",
-    "dotenv": "^8.0.0",
+    "dotenv": "^16.4.7",
     "es5-lit-element": "^2.2.1",
     "es5-lit-html": "^1.1.1",
     "express": "^4.17.1",
