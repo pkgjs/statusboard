@@ -1,6 +1,45 @@
-const assert = require('assert')
-const { it, describe } = require('mocha')
+const assert = require('assert');
+const { Organization } = require('../lib/organization');
 const { Project } = require('../lib/project')
+const { describe, it } = require('mocha');
+
+describe('Organization', function() {
+    it('should create an organization with a name string', function() {
+        const org = new Organization('TestOrg');
+        assert.strictEqual(org.name, 'TestOrg');
+        assert.strictEqual(org.displayName, 'TestOrg');
+        assert.strictEqual(org.url, undefined);
+    });
+
+    it('should create an organization with an object', function() {
+        const org = new Organization({ name: 'TestOrg', displayName: 'Test Organization', url: 'http://test.org' });
+        assert.strictEqual(org.name, 'TestOrg');
+        assert.strictEqual(org.displayName, 'Test Organization');
+        assert.strictEqual(org.url, 'http://test.org');
+    });
+
+    it('should use name as displayName if displayName is not provided', function() {
+        const org = new Organization({ name: 'TestOrg' });
+        assert.strictEqual(org.name, 'TestOrg');
+        assert.strictEqual(org.displayName, 'TestOrg');
+        assert.strictEqual(org.url, undefined);
+    });
+
+    it('should handle empty object input', function() {
+        const org = new Organization({});
+        assert.strictEqual(org.name, undefined);
+        assert.strictEqual(org.displayName, undefined);
+        assert.strictEqual(org.url, undefined);
+    });
+
+    it('should handle no input', function() {
+        const org = new Organization();
+        assert.strictEqual(org.name, undefined);
+        assert.strictEqual(org.displayName, undefined);
+        assert.strictEqual(org.url, undefined);
+    });
+});
+
 
 describe('Project', () => {
   it('should initialize with a string repo', () => {
