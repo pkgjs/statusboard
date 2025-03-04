@@ -1,6 +1,7 @@
 'use strict'
 /* eslint-disable */
 /* eslint-env browser */
+require('regenerator-runtime/runtime')
 const { html } = require('es5-lit-element')
 const { render } = require('es5-lit-html')
 const config = window.__config || {}
