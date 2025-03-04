@@ -56,7 +56,7 @@
     "nighthawk": "^2.3.0-1",
     "pacote": "^20.0.0",
     "regenerator-runtime": "^0.14.1",
-    "yargs": "^13.3.0"
+    "yargs": "^17.7.2"
   },
   "engines": {
     "node": ">=18"
