@@ -54,17 +54,13 @@ require('nighthawk')({
 
     render(html`
       <statusboard-page .config="${config}">
-        <style>
-          main { display: flex; }
-          main section { padding: 0 1rem; }
-        </style>
-        <main>
-          <section>
+        <main id="main-index">
+          <section class="issues-list">
             <h1><a href="${config.baseUrl}/issues">Top Issues</a></h1>
 
             ${res.locals.issues.map(([tag, issues]) => {
               return html`
-                <div class="issues-list">
+                <div>
                   <h3><a href="${config.baseUrl}/issues/${tag.name}">${tag.name}</a></h3>
                   <ul>
                     ${issues.map((issue) => {
@@ -74,7 +70,7 @@ require('nighthawk')({
                               <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
                               / <a href="https://www.github.com/${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
                             </span>
-                            : <a href="${issue.issue.url}" target="_blank">${issue.issue.title}</a>
+                            <a href="${issue.issue.url}" target="_blank" class="issue-title">${issue.issue.title}</a>
                           </li>
                       `
                     })}
@@ -118,10 +114,9 @@ require('nighthawk')({
       <statusboard-page .config="${config}">
         <main>
           ${res.locals.issues.map(([tag, issues]) => html`
-            <section>
+            <section class="issues-list">
               <h1><a href="${config.baseUrl}/issues/${tag.name}">${tag.name}</a></h1>
-
-              <div class="issues-list">
+              <div >
                 <ul>
                   ${issues.map((issue) => html`
                       <li>
@@ -129,7 +124,7 @@ require('nighthawk')({
                           <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
                           / <a href="${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
                         </span>
-                        : <a href="${issue.issue.url}" target="_blank">${issue.issue.title}</a>
+                        <a href="${issue.issue.url}" target="_blank" class="issue-title">${issue.issue.title}</a>
                       </li>
                   `)}
                 </ul>
@@ -146,19 +141,21 @@ require('nighthawk')({
     }, null)
     render(html`
       <statusboard-page .config="${config}">
-        <h1>Issues: ${req.params.label}</h1>
         <div class="issues-list">
-          <ul>
-            ${issues.map((issue) => html`
-                <li>
-                  <span class="project-link">
-                    <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
-                    / <a href="${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
-                  </span>
-                  : <a href="${issue.issue.url}" target="_blank">${issue.issue.title}</a>
-                </li>
-            `)}
-          </ul>
+          <h1>Issues: ${req.params.label}</h1>
+          <div>
+            <ul>
+              ${issues.map((issue) => html`
+                  <li>
+                    <span class="project-link">
+                      <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
+                      / <a href="${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
+                    </span>
+                    <a href="${issue.issue.url}" target="_blank" class="issue-title">${issue.issue.title}</a>
+                  </li>
+              `)}
+            </ul>
+          </div>
         </div>
       </statusboard-page>
     `, document.body)

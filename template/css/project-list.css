@@ -1,18 +1,27 @@
 @import './normalize-content.css';
 
+main {
+  width: 100vw;
+  max-width: 100vw;
+  padding: 1.5rem;
+}
+
 .project-list {
+  background-color: #fff;
+  border-inline: 1px solid #ddd;
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
 
+  tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
   td {
     padding: .5rem;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #fff;
   }
-  tr:nth-child(even) td {
-    background: #f9f9f9;
-  }
+
   tr td:nth-child(1) {
     min-width: 8rem;
     max-width: 12rem;
