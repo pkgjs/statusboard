@@ -7,10 +7,11 @@ body {
 
 main {
   width: 100vw;
+  max-width: 100vw;
+  padding: 1.5rem;
 }
 
 #main-index {
-  padding: 1.5rem;
   display: grid;
   gap: 1.5rem;
   grid-template-areas: "issues issues users";
