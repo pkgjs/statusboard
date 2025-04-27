@@ -54,17 +54,13 @@ require('nighthawk')({
 
     render(html`
       <statusboard-page .config="${config}">
-        <style>
-          main { display: flex; }
-          main section { padding: 0 1rem; }
-        </style>
-        <main>
-          <section>
+        <main id="main-index">
+          <section class="issues-list">
             <h1><a href="${config.baseUrl}/issues">Top Issues</a></h1>
 
             ${res.locals.issues.map(([tag, issues]) => {
               return html`
-                <div class="issues-list">
+                <div>
                   <h3><a href="${config.baseUrl}/issues/${tag.name}">${tag.name}</a></h3>
                   <ul>
                     ${issues.map((issue) => {
@@ -74,7 +70,7 @@ require('nighthawk')({
                               <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
                               / <a href="https://www.github.com/${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
                             </span>
-                            : <a href="${issue.issue.url}" target="_blank">${issue.issue.title}</a>
+                            <a href="${issue.issue.url}" target="_blank" class="issue-title">${issue.issue.title}</a>
                           </li>
                       `
                     })}
