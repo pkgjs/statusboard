@@ -94,3 +94,8 @@ main {
   }
 }
 
+@media screen and (max-width: 690px) {
+  #main-index {
+    grid-template-areas: "issues" "users";
+  }
+}
