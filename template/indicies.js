@@ -2,7 +2,7 @@
 
 module.exports = {
   projects: async (data, config, key, { type, project, detail }) => {
-    if (!['REPO', 'PACKAGE_JSON', 'PACKUMENT', 'TRAVIS'].includes(type)) {
+    if (!['REPO', 'PACKAGE_JSON', 'PACKUMENT'].includes(type)) {
       return data
     }
 
@@ -10,9 +10,6 @@ module.exports = {
     const existing = data.find((p) => p.repo === project.repo)
     const proj = existing || { ...project }
     switch (type) {
-      case 'TRAVIS':
-        proj.travis = detail
-        break
       case 'PACKAGE_JSON':
         proj.packageJson = detail
         break

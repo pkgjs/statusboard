@@ -71,13 +71,6 @@ class ProjectList extends LitElement {
                   </a>
                 `)}
               </td>
-              <td>
-                ${project.travis && (html`
-                  <a href="https://travis-ci.org/${project.repo}">
-                    <img src="https://badgen.net/travis/${project.repo}" />
-                  </a>
-                `)}
-              </td>
             </tr>
           `)}
         </table>

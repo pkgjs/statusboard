@@ -50,7 +50,6 @@
     "fs-extra": "^8.1.0",
     "inquirer": "^12.4.2",
     "install": "^0.13.0",
-    "js-yaml": "^3.13.1",
     "level": "^5.0.1",
     "lit-element": "^2.2.1",
     "nighthawk": "^2.3.0-1",
