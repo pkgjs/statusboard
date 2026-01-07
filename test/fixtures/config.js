@@ -11,7 +11,10 @@ module.exports = {
 
   title: 'StatusBoard Test',
   description: 'A test for StatusBoard',
-
+  head: [
+    '<link rel="me" href="https://social.lfx.dev/@nodejs" />',
+    '<meta name="fediverse:creator" content="@nodejs@social.lfx.dev" />'
+  ],
   orgs: [
     'pkgjs'
   ],
