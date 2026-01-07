@@ -46,7 +46,7 @@ require('nighthawk')({
     next()
   })
   .get('/', fetchIssues({ limit: 3 }), async (req, res) => {
-    // Turn user activity into a orderd list of 20
+    // Turn user activity into an ordered list of 20
     const userActivity = await (await fetch(`${config.baseUrl}/data/userActivity.json`)).json()
     const u = Object.values(userActivity)
       .filter(user => {
