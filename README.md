@@ -10,22 +10,10 @@ This repository is managed by the [Package Maintenance Working Group](https://gi
 
 ## Example
 
-https://expressjs.github.io/statusboard/
+Example statusboards using `@pkgjs/statusboard`:
 
-## TODO
+- <https://expressjs.github.io/statusboard/> - [Github](https://github.com/expressjs/statusboard)
 
-- Cli logger
-- ~~Pull commit activity~~
-- ~~Clean up template~~
-- `create` command to setup a new project
-- ~~GH actions for building/publishing ([see express](https://github.com/expressjs/statusboard/blob/1de8da96746deb1952ecc0c22427f81083e022c9/.github/workflows/build.yml))~~ https://github.com/pkgjs/gh-pages
-- Contribution graph like on github
-- Meetings page (pull tag "meeting")
-- ~~Orginizations (pull all repos from an org)~~
-- Typescript support (load typings or if authored in TS)
-- People/Teams (specify and display teams, for example the express TC)
-- GH CI status
-- Pinned projects
 
 ## Setup
 
@@ -65,3 +53,14 @@ $ npm run build
 # commit and push the branches now
 $ cd build && git add . && git commit -m "our new statuspage" && git push
 ```
+
+## TODO
+
+- Cli logger
+- `create` command to setup a new project
+- Contribution graph like on github
+- Meetings page (pull tag "meeting")
+- Typescript support (load typings or if authored in TS)
+- People/Teams (specify and display teams, for example the express TC)
+- GH CI status
+- Pinned projects
