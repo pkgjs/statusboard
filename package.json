@@ -46,7 +46,7 @@
     "dotenv": "^17.2.0",
     "es5-lit-element": "^2.2.1",
     "es5-lit-html": "^1.1.1",
-    "express": "^4.17.1",
+    "express": "^5.2.1",
     "fs-extra": "^8.1.0",
     "inquirer": "^12.4.2",
     "install": "^0.13.0",
