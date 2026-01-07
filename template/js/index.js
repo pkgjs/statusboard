@@ -48,9 +48,23 @@ require('nighthawk')({
   .get('/', fetchIssues({ limit: 3 }), async (req, res) => {
     // Turn user activity into a orderd list of 20
     const userActivity = await (await fetch(`${config.baseUrl}/data/userActivity.json`)).json()
-    const u = Object.values(userActivity).sort((v1, v2) => {
-      return v1.activityCount < v2.activityCount ? 1 : v1.activityCount === v2.activityCount ? 0 : -1
-    }).slice(0, 20)
+    const u = Object.values(userActivity)
+      .filter(user => {
+        if (!config.bots && user?.type) {
+          return user.type !== 'Bot' 
+        }
+
+        // Because the GitHub API doesn’t return a type for the Dependabot account
+        else if (!config.bots && user.login && user.login.endsWith('[bot]')) {
+          return false
+        }
+
+        return true
+      })
+      .sort((v1, v2) => {
+        return v1.activityCount < v2.activityCount ? 1 : v1.activityCount === v2.activityCount ? 0 : -1
+      })
+      .slice(0, 20)
 
     render(html`
       <statusboard-page .config="${config}">
