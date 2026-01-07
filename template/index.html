@@ -5,11 +5,18 @@
     <title><%= title %></title>
     <meta name="description" content="<%= description %>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <!-- <link rel="apple-touch-icon" href="icon.png"> -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
     <meta name="theme-color" content="#fafafa">
-    <!-- Place favicon.ico in the root directory -->
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%= title %>" />
+    <meta property="og:description" content="<%= description %>" />
+
+    <meta name="twitter:title" content="<%= title %>" />
+    <meta name="twitter:description" content="<%= description %>" />
+
+    <%- head.join('\n') %>
 
     <link href="<%= files.css.index %>" rel="stylesheet" />
     <script>
