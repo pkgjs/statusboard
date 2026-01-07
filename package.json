@@ -9,6 +9,12 @@
     "badges",
     "express"
   ],
+  "files": [
+    "template",
+    "bin",
+    "index.js",
+    "lib"
+  ],
   "license": "MIT",
   "main": "index.js",
   "repository": {
