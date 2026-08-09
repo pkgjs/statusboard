@@ -58,14 +58,14 @@ class ProjectList extends LitElement {
                 </a>
               </td>
               <td>
-                ${project.packageJson && (html`
+                ${project.packageJson && (!project.packageJson.private || undefined) && (html`
                   <a href="https://npmjs.org/package/${project.packageName}">
                     <img src="https://badgen.net/npm/v/${project.packageName}" />
                   </a>
                 `)}
               </td>
               <td>
-                ${project.packageJson && (html`
+                ${project.packageJson && (!project.packageJson.private || undefined) && (html`
                   <a href="https://npmjs.org/package/${project.packageName}">
                     <img src="https://badgen.net/npm/dm/${project.packageName}" />
                   </a>
