@@ -101,7 +101,7 @@ require('nighthawk')({
                 <li>
                   <a href="https://www.github.com/${user.login}" target="_blank">
                     <span class="avatar">
-                      <img src="${user.avatar_url}" />
+                      <img src="${user.avatar_url || user.avatarUrl}" />
                     </span>
                     @${user.login}
                   </a>: ${user.activityCount} contribution
