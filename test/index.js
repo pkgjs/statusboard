@@ -2,7 +2,7 @@
 require('../lib/load-env')()
 const { suite, test, before } = require('mocha')
 const assert = require('assert')
-const fs = require('fs-extra')
+const fs = require('node:fs/promises')
 const pkg = require('../package.json')
 const statusboard = require('../')
 
@@ -19,7 +19,7 @@ Then run:
 const CONFIG = require('./fixtures/config')
 suite(pkg.name, () => {
   before(async () => {
-    await fs.remove(CONFIG.outputDirectory)
+    await fs.rm(CONFIG.outputDirectory, { recursive: true, force: true })
   })
 
   test('Configure a statusboard instance', async () => {
