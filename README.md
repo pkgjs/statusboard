@@ -17,6 +17,11 @@ Example statusboards using `@pkgjs/statusboard`:
 
 ## Setup
 
+Requires Node.js 22 or newer. The CLI loads `.env` from the current directory
+using Node.js's native environment file support. Use `--env <path>` to load a
+different file. Existing environment variables take precedence, and the file
+is optional when variables are provided by the shell or CI.
+
 WARNING: work in process, the following doesn't work yet, but soon!
 
 The easiest way to create a status board for your project is using Github Pages.  To get started, create a new repo for your project and clone it

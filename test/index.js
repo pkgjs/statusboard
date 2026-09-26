@@ -1,5 +1,5 @@
 'use strict'
-require('dotenv').config()
+require('../lib/load-env')()
 const { suite, test, before } = require('mocha')
 const assert = require('assert')
 const fs = require('fs-extra')
