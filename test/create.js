@@ -86,6 +86,7 @@ suite('Create command', () => {
 
   test('preserves an existing nonempty directory', async () => {
     await fs.writeFile(path.join(directory, 'config.js'), 'original')
+    inquirer.prompt = async () => { throw new Error('Must reject the destination before prompting') }
     await assert.rejects(create({ directory }), /Directory is not empty/)
     assert.equal(await fs.readFile(path.join(directory, 'config.js'), 'utf8'), 'original')
     assert.deepEqual(await fs.readdir(directory), ['config.js'])
@@ -94,6 +95,58 @@ suite('Create command', () => {
   test('rejects an empty directory answer', async () => {
     answers.path = '   '
     await assert.rejects(create(), /Enter a project directory/)
+  })
+
+  test('creates without prompts using CLI settings and --no-git', async () => {
+    inquirer.prompt = async () => { throw new Error('Must not prompt with --yes') }
+    const app = path.join(directory, 'automated')
+    await cli(() => {}).parseAsync([
+      'create', app, '--yes', '--no-git', '--orgs', 'pkgjs,nodejs',
+      '--repositories', 'expressjs/express, pkgjs/statusboard',
+      '--labels', 'bug, help wanted', '--github-actions'
+    ])
+    const config = require(path.join(app, 'config.js'))
+    assert.deepEqual(config.orgs, ['pkgjs', 'nodejs'])
+    assert.deepEqual(config.projects, ['expressjs/express', 'pkgjs/statusboard'])
+    assert.deepEqual(config.issueLabels, ['bug', 'help wanted'])
+    assert.ok((await fs.stat(path.join(app, '.github', 'workflows', 'build.yml'))).isFile())
+    await assert.rejects(fs.stat(path.join(app, '.git')), { code: 'ENOENT' })
+  })
+
+  test('uses default values without a terminal or directory argument', async () => {
+    execFileSync(process.execPath, [require.resolve('../bin/statusboard'), 'create', '-y', '--no-git'], {
+      cwd: directory,
+      stdio: ['ignore', 'pipe', 'pipe'],
+      timeout: 10000
+    })
+    const app = path.join(directory, 'statusboard')
+    const config = require(path.join(app, 'config.js'))
+    assert.deepEqual(config.orgs, [])
+    assert.deepEqual(config.projects, [])
+    assert.equal(Object.hasOwn(config, 'issueLabels'), false)
+    await assert.rejects(fs.stat(path.join(app, '.github')), { code: 'ENOENT' })
+    await assert.rejects(fs.stat(path.join(app, '.git')), { code: 'ENOENT' })
+  })
+
+  test('prompts only for missing interactive settings and preserves explicit empty labels', async () => {
+    inquirer.prompt = async questions => {
+      const asked = questions.filter(question => !question.when || question.when({})).map(question => question.name)
+      assert.deepEqual(asked, ['repositories'])
+      return { repositories: 'pkgjs/statusboard' }
+    }
+    const app = path.join(directory, 'interactive')
+    await cli(() => {}).parseAsync(['create', app, '--no-git', '--orgs', 'pkgjs', '--labels', '', '--no-github-actions'])
+    const config = require(path.join(app, 'config.js'))
+    assert.deepEqual(config.issueLabels, [])
+    assert.deepEqual(config.projects, ['pkgjs/statusboard'])
+    await assert.rejects(fs.stat(path.join(app, '.github')), { code: 'ENOENT' })
+  })
+
+  test('rejects invalid repository options before prompting or creating files', async () => {
+    inquirer.prompt = async () => { throw new Error('Must validate supplied options first') }
+    const app = path.join(directory, 'invalid')
+    await assert.rejects(create({ directory: app, repositories: 'missing-owner' }), /Use owner\/repo/)
+    await assert.rejects(fs.stat(app), { code: 'ENOENT' })
   })
 
   test('keeps generated files and the repository if the initial commit fails', async () => {

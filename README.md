@@ -35,6 +35,19 @@ and optional GitHub Actions deployment. It creates `config.js`, `package.json`,
 `.gitignore`, and a local Git repository. Choose a new or empty directory;
 existing project files are never overwritten.
 
+For scripts, use `--yes` (`-y`) to skip all prompts. Omitted values default to
+the `statusboard` directory, built-in labels, no organizations or repositories,
+no GitHub Actions workflow, and Git initialization enabled. Override these with
+`--orgs`, `--repositories`, `--labels`, `--github-actions`, and `--no-git`:
+
+```sh
+npx @pkgjs/statusboard create my-statusboard --yes --orgs pkgjs,nodejs \
+  --repositories expressjs/express --labels "help wanted,bug" --github-actions --no-git
+```
+
+These options also work interactively: only unspecified settings are prompted.
+Use `--labels ""` for no issue labels or `--no-github-actions` to skip the workflow.
+
 Set `GITHUB_TOKEN` in your environment or in a local `.env` file, then run:
 
 ```sh
