@@ -149,6 +149,115 @@ suite('Create command', () => {
     await assert.rejects(fs.stat(app), { code: 'ENOENT' })
   })
 
+  test('rejects a file as the destination without changing it or prompting', async () => {
+    const target = path.join(directory, 'existing-file')
+    await fs.writeFile(target, 'keep this file')
+    inquirer.prompt = async () => { throw new Error('Must reject the destination before prompting') }
+    await assert.rejects(create({ directory: target }), { code: 'ENOTDIR' })
+    assert.equal(await fs.readFile(target, 'utf8'), 'keep this file')
+  })
+
+  test('does not create directories when the user cancels the configuration prompts', async () => {
+    const app = path.join(directory, 'nested', 'cancelled')
+    const cancelled = new Error('User cancelled')
+    inquirer.prompt = async () => { throw cancelled }
+    await assert.rejects(create({ directory: app }), error => error === cancelled)
+    assert.deepEqual(await fs.readdir(directory), [])
+  })
+
+  test('preserves files added to the destination while prompting', async () => {
+    const app = path.join(directory, 'changed')
+    inquirer.prompt = async () => {
+      await fs.mkdir(app)
+      await fs.writeFile(path.join(app, 'config.js'), 'created while prompting')
+      return answers
+    }
+    await assert.rejects(create({ directory: app }), /Directory is not empty/)
+    assert.deepEqual(await fs.readdir(app), ['config.js'])
+    assert.equal(await fs.readFile(path.join(app, 'config.js'), 'utf8'), 'created while prompting')
+  })
+
+  test('accepts repeated list options and preserves special characters in labels', async () => {
+    const app = path.join(directory, 'repeated-options')
+    const label = 'needs "review" \\ documentation\nnext line'
+    await cli(() => {}).parseAsync([
+      'create', app, '--yes', '--no-git',
+      '--orgs', 'pkgjs, nodejs', '--orgs', 'expressjs',
+      '--repositories', 'pkgjs/statusboard', '--repositories', 'nodejs/node,',
+      '--labels', label, '--labels', 'bug, '
+    ])
+    const config = require(path.join(app, 'config.js'))
+    assert.deepEqual(config.orgs, ['pkgjs', 'nodejs', 'expressjs'])
+    assert.deepEqual(config.projects, ['pkgjs/statusboard', 'nodejs/node'])
+    assert.deepEqual(config.issueLabels, [label, 'bug'])
+  })
+
+  test('uses the directory name for Pages locally and the configured base path in CI', async () => {
+    const app = path.join(directory, 'local-board')
+    await create({ directory: app, yes: true, git: false, githubActions: true })
+    const configFile = path.join(app, 'config.js')
+    for (const [basePath, expected] of [[undefined, '/local-board'], ['/deployed-repo', '/deployed-repo'], ['', '']]) {
+      if (basePath === undefined) delete process.env.STATUSBOARD_BASE_URL
+      else process.env.STATUSBOARD_BASE_URL = basePath
+      delete require.cache[require.resolve(configFile)]
+      assert.equal(require(configFile).baseUrl, expected)
+    }
+  })
+
+  test('builds a site through the CLI using a generated project and local indexed data', async function () {
+    this.timeout(20000)
+    const app = path.join(directory, 'generated-site')
+    process.env.STATUSBOARD_BASE_URL = '/published-board'
+    await cli(() => {}).parseAsync([
+      'create', app, '--yes', '--no-git', '--repositories', 'example/project',
+      '--labels', 'help wanted', '--github-actions'
+    ])
+    // Seed the same records the indexer stores, without making network requests.
+    const seed = `
+      const statusboard = require(${JSON.stringify(require.resolve('../'))})
+      ;(async () => {
+        const board = await statusboard(require('./config.js'))
+        const project = board.config.projects[0]
+        try {
+          await board.db.put('example:project:REPO', {
+            type: 'REPO', project, detail: { url: 'https://github.com/example/project' }
+          })
+          await board.db.put('example:project:ISSUE:1', {
+            type: 'ISSUE', project, detail: {
+              state: 'OPEN', number: 1, title: 'An indexed issue',
+              url: 'https://github.com/example/project/issues/1',
+              labels: [{ name: 'help wanted', color: '008800' }]
+            }
+          })
+          await board.db.put('example:project:COMMIT:1', {
+            type: 'COMMIT', project, detail: {
+              date: new Date().toISOString(),
+              author: { login: 'contributor', avatarUrl: 'https://example.com/avatar.png' }
+            }
+          })
+        } finally {
+          await board.close()
+        }
+      })().catch(error => { console.error(error); process.exitCode = 1 })
+    `
+    const options = { cwd: app, stdio: ['ignore', 'pipe', 'pipe'], timeout: 10000 }
+    execFileSync(process.execPath, ['-e', seed], options)
+    execFileSync(process.execPath, [require.resolve('../bin/statusboard'), 'site', '-C', './config.js'], options)
+
+    const output = path.join(app, 'build')
+    const readJson = async name => JSON.parse(await fs.readFile(path.join(output, 'data', `${name}.json`), 'utf8'))
+    assert.equal((await readJson('projects'))[0].repo, 'example/project')
+    assert.equal((await readJson('labeledIssues'))['help wanted'][0].issue.title, 'An indexed issue')
+    assert.equal((await readJson('userActivity')).contributor.activityCount, 1)
+    assert.ok((await fs.stat(path.join(output, '404.html'))).isFile())
+    const html = await fs.readFile(path.join(output, 'index.html'), 'utf8')
+    const assets = [...html.matchAll(/(?:src|href)="(\/published-board\/[^" ]+\.(?:js|css))"/g)]
+    assert.ok(assets.length >= 2, 'HTML should reference the generated JavaScript and stylesheet')
+    for (const [, asset] of assets) {
+      assert.ok((await fs.stat(path.join(output, asset.slice('/published-board/'.length)))).size > 0)
+    }
+  })
+
   test('keeps generated files and the repository if the initial commit fails', async () => {
     process.env.GIT_AUTHOR_NAME = ''
     const app = path.join(directory, 'no-identity')
