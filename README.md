@@ -22,47 +22,48 @@ using Node.js's native environment file support. Use `--env <path>` to load a
 different file. Existing environment variables take precedence, and the file
 is optional when variables are provided by the shell or CI.
 
-WARNING: work in process, the following doesn't work yet, but soon!
+Create a project interactively:
 
-The easiest way to create a status board for your project is using Github Pages.  To get started, create a new repo for your project and clone it
-to your development machine.  In the new directory run the following:
-
+```sh
+npx @pkgjs/statusboard create my-statusboard
+cd my-statusboard
+npm install
 ```
-# Creates a statusboard project
-# @TODO make this command actually work as it does not right now
-$ npx @pkgjs/statusboard create
 
-# Setup your config in `index.js
-# Then commit your work
-$ git commit -am "statusboard setup"
+The command asks for organizations, repositories (`owner/repo`), issue labels,
+and optional GitHub Actions deployment. It creates `config.js`, `package.json`,
+`.gitignore`, and a local Git repository. Choose a new or empty directory;
+existing project files are never overwritten.
 
-# Create an orphan branch for our builds
-$ git checkout --orphan gh-pages
+For scripts, use `--yes` (`-y`) to skip all prompts. Omitted values default to
+the `statusboard` directory, built-in labels, no organizations or repositories,
+no GitHub Actions workflow, and Git initialization enabled. Override these with
+`--orgs`, `--repositories`, `--labels`, `--github-actions`, and `--no-git`:
 
-# Remove the files we dont need here
-$ git rm -rf .
-
-# Create a .nojekyll file, this turns off pesky github pages stuff
-$ touch .nojekyll
-$ git commit --am "github pages initial commit"
-
-# Now we setup the branch as a working tree on the master branch
-$ git checkout master
-$ mkdir build
-$ git worktree add build gh-pages
-
-# Now we can run the index and build
-$ npm run build
-
-# Now we should have a site in ./build, we can
-# commit and push the branches now
-$ cd build && git add . && git commit -m "our new statuspage" && git push
+```sh
+npx @pkgjs/statusboard create my-statusboard --yes --orgs pkgjs,nodejs \
+  --repositories expressjs/express --labels "help wanted,bug" --github-actions --no-git
 ```
+
+These options also work interactively: only unspecified settings are prompted.
+Use `--labels ""` for no issue labels or `--no-github-actions` to skip the workflow.
+
+Set `GITHUB_TOKEN` in your environment or in a local `.env` file, then run:
+
+```sh
+npm run build
+```
+
+The site is generated in `build/`. Edit `config.js` to customize the board.
+
+If you selected GitHub Actions, push the generated project to a GitHub repository
+with a `main` branch and enable **Settings → Pages → Source → GitHub Actions**.
+The workflow builds and deploys the site using the repository's Pages base path.
+Without Actions, set `baseUrl` in `config.js` to match your hosting path.
 
 ## TODO
 
 - Cli logger
-- `create` command to setup a new project
 - Contribution graph like on github
 - Meetings page (pull tag "meeting")
 - Typescript support (load typings or if authored in TS)
