@@ -6,6 +6,12 @@ const { html } = require('es5-lit-element')
 const { render } = require('es5-lit-html')
 const config = window.__config || {}
 
+// Only allow http(s) URLs from untrusted external data to prevent
+// javascript: URI based XSS via href attributes
+function safeUrl (url) {
+  return /^https?:\/\//i.test(url) ? url : '#'
+}
+
 // Import custom elements
 require('./page')
 require('./project-list')
@@ -84,7 +90,7 @@ require('nighthawk')({
                               <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
                               / <a href="https://www.github.com/${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
                             </span>
-                            <a href="${issue.issue.url}" target="_blank" class="issue-title">${issue.issue.title}</a>
+                            <a href="${safeUrl(issue.issue.url)}" target="_blank" class="issue-title">${issue.issue.title}</a>
                           </li>
                       `
                     })}
@@ -138,7 +144,7 @@ require('nighthawk')({
                           <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
                           / <a href="${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
                         </span>
-                        <a href="${issue.issue.url}" target="_blank" class="issue-title">${issue.issue.title}</a>
+                        <a href="${safeUrl(issue.issue.url)}" target="_blank" class="issue-title">${issue.issue.title}</a>
                       </li>
                   `)}
                 </ul>
@@ -165,7 +171,7 @@ require('nighthawk')({
                       <a href="https://www.github.com/${issue.project.repoOwner}" target="_blank">${issue.project.repoOwner}</a>
                       / <a href="${issue.project.repo}" target="_blank">${issue.project.repoName}</a>
                     </span>
-                    <a href="${issue.issue.url}" target="_blank" class="issue-title">${issue.issue.title}</a>
+                    <a href="${safeUrl(issue.issue.url)}" target="_blank" class="issue-title">${issue.issue.title}</a>
                   </li>
               `)}
             </ul>
