@@ -23,7 +23,7 @@ class ProjectList extends LitElement {
                 / <a href="${(project.repoDetails && project.repoDetails.url) || `https://www.github.com/${project.repoOwner}/${project.repoName}`}" target="_blank">${project.repoName}</a>
               </td>
               <td title="Stars">
-                <a href="https://npmjs.org/package/${project.packageName}">
+                <a href="https://www.github.com/${project.repo}">
                   <img src="https://badgen.net/github/stars/${project.repo}?color=yellow" />
                 </a>
               </td>
@@ -58,14 +58,14 @@ class ProjectList extends LitElement {
                 </a>
               </td>
               <td>
-                ${project.packageJson && (html`
+                ${project.packageJson && (!project.packageJson.private || undefined) && (html`
                   <a href="https://npmjs.org/package/${project.packageName}">
                     <img src="https://badgen.net/npm/v/${project.packageName}" />
                   </a>
                 `)}
               </td>
               <td>
-                ${project.packageJson && (html`
+                ${project.packageJson && (!project.packageJson.private || undefined) && (html`
                   <a href="https://npmjs.org/package/${project.packageName}">
                     <img src="https://badgen.net/npm/dm/${project.packageName}" />
                   </a>
