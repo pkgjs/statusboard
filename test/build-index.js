@@ -3,7 +3,7 @@ const { suite, test, beforeEach, afterEach } = require('mocha')
 const assert = require('assert')
 const os = require('os')
 const path = require('path')
-const fs = require('fs-extra')
+const fs = require('node:fs/promises')
 const level = require('level')
 const github = require('../lib/github')
 const files = require('../lib/files')
@@ -49,7 +49,7 @@ suite('Private package indexing', () => {
   afterEach(async () => {
     for (const reset of restore) reset()
     await db.close()
-    await fs.remove(directory)
+    await fs.rm(directory, { recursive: true, force: true })
   })
 
   function index () {
